@@ -3,18 +3,15 @@
 
 using namespace std;
 
-static int total_size;     
+static int total_size = 110;   
+int iteration = 100;
 static bool isfilled = false;
-// shows total size of list is zero
-void sonaEkle();
-void basaEkle();
-void ortayaEkle();
+int cl = -1;
 
 struct Node {
     int deger;
     Node* sonraki;
 };
-
 struct Linkedlist {
     Node* bas;
     void olustur();
@@ -34,88 +31,77 @@ struct ArrayList {
     void sil(int); //sýra numarasý alarak silme yapar
     void yazdir(); //liste içeriðini ekrana yazar
     void bosalt(); //listenin bellek alanlarýný iade eder
-    void size();
-   // int sayac; //liste kaç eleman olduðunu tutar
-    int cs = 0;                                                 //shows that current size of list is zero
-    int cl = -1;
+    int sayac = 0; //liste kaç eleman olduðunu tutar
 };
+
 int main()
 {
     Linkedlist* ll = new Linkedlist();
     ArrayList* al = new ArrayList();
-    int iteration = 100;
 
-    /*ll->olustur();
-    ll->yazdir();
-    cout << "eleman sayisi > " << ll->sayac << endl;
+    al->olustur();
+    ll->olustur();
+    //ll->yazdir();
+    //cout << "eleman sayisi > " << ll->sayac << endl;
     for (int i = 0;i < iteration;i++)
     {
         ll->ekle(i, i);
+        al->ekle(i, i);
     }
-    cout << iteration << " item added" << endl;
+    //cout << iteration << " item added" << endl;
     //cout << "eleman sayisi > " << ll->sayac << endl;
-    cout << iteration << " elemanli listede" << endl;
+    //cout << exp_size << " item added" << endl;
+    //cout << "current size of list is:" << al->sayac << endl;
+    cout << endl;
+    cout << "\t"<<iteration << " elemanli listede" << endl;
     cout << endl;
     auto begin1 = std::chrono::high_resolution_clock::now();
-    ll->ekle(31, 10);
+    ll->ekle(31, 50);
     auto end1 = std::chrono::high_resolution_clock::now();
-    ll->yazdir();
-    auto elapsed1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - begin1);
-    cout << endl;
-    cout << "Baglantili liste ile gerceklemede araya ekleme suresi => " << elapsed1.count() << " <= mikro-saniye" << endl;
-    */
+    //ll->yazdir();
+    auto begin2 = std::chrono::high_resolution_clock::now();
+    al->ekle(31, 50);
+    auto end2 = std::chrono::high_resolution_clock::now();
 
-    
-    al->olustur();
-    //al->yazdir();
+    auto elapsed1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - begin1);
+    auto elapsed2 = std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - begin2);
+    cout << "\tDizi ile gerceklemede araya ekleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
+    cout << endl;
+    cout << "\tBaglantili liste ile gerceklemede araya ekleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
     cout << endl;
    
-    for (int i = 0;i < al->cs;i++) {
-            al->ekle(i, i);
-    }
     
     
     
-    al->yazdir();
+    /*al->yazdir();
     al->size();
     cout << endl;
     al->ekle(31, 6);
     al->size();
     al->yazdir();
-
-    //auto begin2 = std::chrono::high_resolution_clock::now();
-    
-   // auto end2 = std::chrono::high_resolution_clock::now();
-    //auto elapsed2 = std::chrono::duration_cast<std::chrono::microseconds>(end2-begin2);
-    //cout<<"Dizi ile gerçeklemede araya ekleme süresi => "<<elapsed2.count()<<"mikro-saniye"<<endl;
+    al->ekle(31, 13);
+    al->size();
+    al->yazdir();
+    al->guncelle(52, 13);
+    al->size();
+    al->yazdir();
+    al->sil(13);
+    al->size();
+    al->yazdir();
+    al->sil(6);
+    al->sil(0);
+    al->size();
+    al->yazdir();
+    */
     cout<<endl;
     return 0;
 
 }
+
+
 void Linkedlist::olustur() {
     bas = NULL;
 }
-/*void ArrayList::ekle(int x, int y) {
-    const int m = 25;
-    int arr[m], i;
-    for (i = 0; i < m; i++)
-    {
-        arr[i] = i;
-    }
-    for (i = m - 1; i > y; i--)
-    {
-        arr[i] = arr[i - 1];
-    }
-    if (m > y) {
-        arr[y] = x;
-    }
-    cout << endl << "Yeni dizi:" << endl;
-    for (i = 0; i < m; i++) {
-        cout << arr[i] << "  ";
-    }
-    cout << endl;
-    cout << endl;
-}*/
 void Linkedlist::yazdir() {
     Node* tara;
     tara = bas;
@@ -209,53 +195,47 @@ void Linkedlist::guncelle(int val, int hm) {
 }
 
 void ArrayList::olustur() {
-    cout << "enter total size of list:";
-    cin >> total_size;
-    do
-    {
-        cout << "enter current size of list:";
-        cin >> cs;
-    } while (cs < 1 || cs >= total_size);
-    bas = new int[total_size];              // dynamically creating array with size ‘0’
+    bas = new int[total_size];
     cl = 1;
-    
 }
 void ArrayList::ekle(int sayi, int pos) {
-    if (cs > pos) {
+    if (total_size>pos) {
         isfilled = true;
+        sayac++;
+        //cs++;
+        //bas[cs+1] = bas[cs];
+        for (int i = total_size;i > pos;i--)
+            bas[i] = bas[i - 1];
 
         bas[pos] = sayi;
-
-        /*for (int i = cs;i >= pos;i--)
-            bas[i] = bas[i-1];
-        bas[pos] = sayi;
-*/
     }
-    /*else if (pos > cs && pos < total_size)
-    {
-        isfilled = true;
-
-        bas[pos] = sayi;
-    }*/
     else
         cout << "hata" << endl;
 }
 void ArrayList::yazdir()
 {
-    if (cs == 0)
-        cout << "list is empty\n";
-    else if (isfilled==false)
+   /* if (== 0)
+        cout << "list is empty\n";*/
+     if (isfilled==false)
         cout <<endl<< "list not filled" << endl;    
     else
         if (cl == -1)
             cout << "list is not created\n";
         else
-            for (int i = 0;i < cs;i++)
+            for (int i = 0;i < sayac;i++)
                 cout << bas[i] << endl;
     
 }
-void ArrayList::size()
-{
-
-    cout << "current size of list is:" << cs << endl;
+void ArrayList::guncelle(int yen, int pos) {
+    if (total_size > pos) 
+        bas[pos] = yen;
+    
+}
+void ArrayList::sil(int sil) {
+    for (int i = sil;i <= sayac - 1;i++)
+    {
+        bas[i] = bas[i + 1];
+    }
+    bas[sayac - 1] = {};
+    sayac--;
 }
