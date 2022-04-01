@@ -3,10 +3,10 @@
 
 using namespace std;
 
-static int total_size = 10050;   
-int iteration = 10000;
+int iteration = 100;
 static bool isfilled = false;
 int cl = -1;
+static int total_size = 110;  
 
 struct Node {
     int deger;
@@ -41,17 +41,14 @@ int main()
 
     al->olustur();
     ll->olustur();
-    //ll->yazdir();
-    //cout << "eleman sayisi > " << ll->sayac << endl;
     for (int i = 0;i < iteration;i++)
     {
         ll->ekle(i, i);
         al->ekle(i, i);
     }
     //cout << iteration << " item added" << endl;
-    //cout << "eleman sayisi > " << ll->sayac << endl;
-    //cout << exp_size << " item added" << endl;
-    //cout << "current size of list is:" << al->sayac << endl;
+    //cout << "linkedlist eleman sayisi > " << ll->sayac << endl;
+    //cout << "dizi eleman sayisi > " << al->sayac << endl;
     cout << endl;
     cout << "\t"<<iteration << " elemanli listede" << endl;
     cout << endl;
@@ -73,32 +70,8 @@ int main()
     //al->yazdir();
     cout << endl;
     //ll->yazdir();
-    //cout << "current size of list is:" << al->sayac << endl;
     ll->bosalt();
-    //cout << "hey" << endl;
-    //ll->yazdir();
     //al->bosalt();
-    //al->yazdir();
-    /*al->yazdir();
-    al->size();
-    cout << endl;
-    al->ekle(31, 6);
-    al->size();
-    al->yazdir();
-    al->ekle(31, 13);
-    al->size();
-    al->yazdir();
-    al->guncelle(52, 13);
-    al->size();
-    al->yazdir();
-    al->sil(13);
-    al->size();
-    al->yazdir();
-    al->sil(6);
-    al->sil(0);
-    al->size();
-    al->yazdir();
-    */
     cout<<endl;
     return 0;
 
@@ -216,8 +189,6 @@ void ArrayList::ekle(int sayi, int pos) {
     if (total_size>pos) {
         isfilled = true;
         sayac++;
-        //cs++;
-        //bas[cs+1] = bas[cs];
         for (int i = total_size;i > pos;i--)
             bas[i] = bas[i - 1];
 
