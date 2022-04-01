@@ -3,8 +3,8 @@
 
 using namespace std;
 
-static int total_size = 110;   
-int iteration = 100;
+static int total_size = 10050;   
+int iteration = 10000;
 static bool isfilled = false;
 int cl = -1;
 
@@ -56,23 +56,29 @@ int main()
     cout << "\t"<<iteration << " elemanli listede" << endl;
     cout << endl;
     auto begin1 = std::chrono::high_resolution_clock::now();
-    ll->ekle(31, 50);
+    ll->guncelle(666, 0);
     auto end1 = std::chrono::high_resolution_clock::now();
-    //ll->yazdir();
+
     auto begin2 = std::chrono::high_resolution_clock::now();
-    al->ekle(31, 50);
+    al->guncelle(666, 0);
     auto end2 = std::chrono::high_resolution_clock::now();
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - begin1);
     auto elapsed2 = std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - begin2);
-    cout << "\tDizi ile gerceklemede araya ekleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
+    cout << "\tDizi ile gerceklemede basi guncelleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
     cout << endl;
-    cout << "\tBaglantili liste ile gerceklemede araya ekleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
+    cout << "\tBaglantili liste ile gerceklemede basi guncelleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
     cout << endl;
    
-    
-    
-    
+    //al->yazdir();
+    cout << endl;
+    //ll->yazdir();
+    //cout << "current size of list is:" << al->sayac << endl;
+    ll->bosalt();
+    //cout << "hey" << endl;
+    //ll->yazdir();
+    //al->bosalt();
+    //al->yazdir();
     /*al->yazdir();
     al->size();
     cout << endl;
@@ -193,6 +199,14 @@ void Linkedlist::guncelle(int val, int hm) {
     else
         cout << "exception" << endl;
 }
+void Linkedlist::bosalt() {
+    Node* p;
+    while (bas) {
+        p = bas;
+        bas = bas->sonraki;
+        delete p;
+    }
+}
 
 void ArrayList::olustur() {
     bas = new int[total_size];
@@ -214,16 +228,14 @@ void ArrayList::ekle(int sayi, int pos) {
 }
 void ArrayList::yazdir()
 {
-   /* if (== 0)
-        cout << "list is empty\n";*/
-     if (isfilled==false)
+    if (isfilled==false)
         cout <<endl<< "list not filled" << endl;    
     else
         if (cl == -1)
             cout << "list is not created\n";
         else
             for (int i = 0;i < sayac;i++)
-                cout << bas[i] << endl;
+                cout << bas[i] << " ";
     
 }
 void ArrayList::guncelle(int yen, int pos) {
@@ -238,4 +250,7 @@ void ArrayList::sil(int sil) {
     }
     bas[sayac - 1] = {};
     sayac--;
+}
+void ArrayList::bosalt() {
+    free(bas);
 }
