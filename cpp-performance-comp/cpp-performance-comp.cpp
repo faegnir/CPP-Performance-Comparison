@@ -137,9 +137,9 @@ void Linkedlist::sil(int yer) {
         cout << "\n0'dan kucuk olamaz!";
     }
     else if (yer == 0 && bas != NULL) {
-        Node* nodeToDelete = bas;
+        Node* silinecek = bas;
         bas = bas->sonraki;
-        free(nodeToDelete);
+        free(silinecek);
     }
     else {
         Node* temp = bas;
@@ -149,9 +149,9 @@ void Linkedlist::sil(int yer) {
             }
         }
         if (temp != NULL && temp->sonraki != NULL) {
-            Node* nodeToDelete = temp->sonraki;
+            Node* silinecek = temp->sonraki;
             temp->sonraki = temp->sonraki->sonraki;
-            free(nodeToDelete);
+            free(silinecek);
         }
         else {
             cout << "\naralikta degil!!";
