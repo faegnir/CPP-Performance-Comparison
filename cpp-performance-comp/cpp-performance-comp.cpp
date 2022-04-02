@@ -3,10 +3,10 @@
 
 using namespace std;
 
-int iteration = 100;
+int iteration = 1000;
 static bool isfilled = false;
 int cl = -1;
-static int total_size = 110;  
+static int total_size = 1050;  
 
 struct Node {
     int deger;
@@ -53,26 +53,29 @@ int main()
     cout << "\t"<<iteration << " elemanli listede" << endl;
     cout << endl;
     auto begin1 = std::chrono::high_resolution_clock::now();
-    ll->guncelle(666, 0);
+    ll->ekle(666, 0);
     auto end1 = std::chrono::high_resolution_clock::now();
 
     auto begin2 = std::chrono::high_resolution_clock::now();
-    al->guncelle(666, 0);
+    al->ekle(666, 0);
     auto end2 = std::chrono::high_resolution_clock::now();
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - begin1);
     auto elapsed2 = std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - begin2);
-    cout << "\tDizi ile gerceklemede basi guncelleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
+    cout << "\tDizi ile gerceklemede sona ekleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
     cout << endl;
-    cout << "\tBaglantili liste ile gerceklemede basi guncelleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
+    cout << "\tBaglantili liste ile gerceklemede sona ekleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
     cout << endl;
    
     //al->yazdir();
     cout << endl;
     //ll->yazdir();
     ll->bosalt();
-    //al->bosalt();
     cout<<endl;
+    /*ll->guncelle(666,500);
+      al->guncelle(666,500);
+      ll->sil(500);
+      al->sil(500);*/
     return 0;
 
 }
@@ -223,5 +226,5 @@ void ArrayList::sil(int sil) {
     sayac--;
 }
 void ArrayList::bosalt() {
-    free(bas);
+    //free(bas);
 }
