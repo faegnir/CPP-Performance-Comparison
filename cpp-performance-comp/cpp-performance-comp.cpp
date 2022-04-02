@@ -6,7 +6,7 @@ using namespace std;
 int iteration = 1000;
 static bool isfilled = false;
 int cl = -1;
-static int total_size = 1050;  
+static int total_size = 1100;  
 
 struct Node {
     int deger;
@@ -62,9 +62,9 @@ int main()
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - begin1);
     auto elapsed2 = std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - begin2);
-    cout << "\tDizi ile gerceklemede sona ekleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
+    cout << "\tDizi ile gerceklemede basa ekleme suresi => " << elapsed2.count() << " <= nano-saniye" << endl;
     cout << endl;
-    cout << "\tBaglantili liste ile gerceklemede sona ekleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
+    cout << "\tBaglantili liste ile gerceklemede basa ekleme suresi => " << elapsed1.count() << " <= nano-saniye" << endl;
     cout << endl;
    
     //al->yazdir();
